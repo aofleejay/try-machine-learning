@@ -1,4 +1,4 @@
-# Email Spam Detection
+# Attachment Classification
 
 ## Getting Started
 `docker-compose up`
