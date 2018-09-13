@@ -16,32 +16,35 @@ vectorizer = TfidfVectorizer()
 Xtrain = vectorizer.fit_transform(x).toarray()
 Ytrain = np.asarray(y)
 
-clftextfile = {
-    'MultinomialNB': MultinomialNB(alpha=0.01),
-    'GaussianNB': GaussianNB(),
-    'BernoulliNB': BernoulliNB(alpha=0.01) ,
-}
+# MultinomialNB
 
-# modelMultinomialNB = clftextfile["MultinomialNB"]
-# # YmodelMultinomialNBPredict = modelMultinomialNB.fit(Xtrain, Ytrain).predict(Xtrain)
-# joblib.dump(modelMultinomialNB.fit(Xtrain, Ytrain), 'modelMultinomialNB.pkl') 
+modelMultinomialNB = MultinomialNB(alpha=0.01).fit(Xtrain, Ytrain)
+joblib.dump(modelMultinomialNB, 'MultinomialNB.pkl')
 
-# modelGaussianNB = clftextfile["GaussianNB"]
-# YmodelGaussianNBPredict = modelGaussianNB.fit(Xtrain, Ytrain).predict(Xtrain)
-# joblib.dump(modelGaussianNB.fit(Xtrain, Ytrain), 'modelGaussianNB.pkl') 
+YmodelMultinomialNBPredict = modelMultinomialNB.predict(Xtrain)
 
-# modelBernoulliNB = clftextfile["BernoulliNB"]
-# # YmodelBernoulliNBPredict = modelBernoulliNB.fit(Xtrain, Ytrain).predict(Xtrain)
-# joblib.dump(modelBernoulliNB.fit(Xtrain, Ytrain), 'modelBernoulliNB.pkl') 
-
-# print confusion_matrix(Ytrain, YmodelMultinomialNBPredict, labels=list(set(Ytrain)))
-# print confusion_matrix(Ytrain, YmodelGaussianNBPredict, labels=list(set(Ytrain)))
-# print confusion_matrix(Ytrain, YmodelBernoulliNBPredict, labels=list(set(Ytrain)))
-
-# print classification_report(Ytrain, YmodelMultinomialNBPredict)
-# print classification_report(Ytrain, YmodelGaussianNBPredict)
-# print classification_report(Ytrain, YmodelBernoulliNBPredict)
-
+print confusion_matrix(Ytrain, YmodelMultinomialNBPredict, labels=list(set(Ytrain)))
+print classification_report(Ytrain, YmodelMultinomialNBPredict)
 # print cross_val_score(modelMultinomialNB, Xtrain, Ytrain, cv=10)
+
+# # GaussianNB
+
+# modelGaussianNB = GaussianNB().fit(Xtrain, Ytrain)
+# joblib.dump(modelGaussianNB, 'GaussianNB.pkl')
+
+# YmodelGaussianNBPredict = modelGaussianNB.predict(Xtrain)
+
+# print confusion_matrix(Ytrain, YmodelGaussianNBPredict, labels=list(set(Ytrain)))
+# print classification_report(Ytrain, YmodelGaussianNBPredict)
 # print cross_val_score(modelGaussianNB, Xtrain, Ytrain, cv=10)
+
+# # BernoulliNB
+
+# modelBernoulliNB = BernoulliNB(alpha=0.01).fit(Xtrain, Ytrain)
+# joblib.dump(modelBernoulliNB, 'BernoulliNB.pkl')
+
+# YmodelBernoulliNBPredict = modelBernoulliNB.predict(Xtrain)
+
+# print confusion_matrix(Ytrain, YmodelBernoulliNBPredict, labels=list(set(Ytrain)))
+# print classification_report(Ytrain, YmodelBernoulliNBPredict)
 # print cross_val_score(modelBernoulliNB, Xtrain, Ytrain, cv=10)
