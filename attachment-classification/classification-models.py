@@ -5,6 +5,7 @@ from sklearn.naive_bayes import MultinomialNB, GaussianNB, BernoulliNB
 from sklearn.metrics import confusion_matrix, recall_score, precision_score, classification_report, accuracy_score
 from sklearn.model_selection import cross_val_score
 from sklearn.externals import joblib
+import pickle
 
 with open('/notebooks/data/x.json', 'r') as file:
     x = json.load(file)
@@ -13,7 +14,12 @@ with open('/notebooks/data/y.json', 'r') as file:
     y = json.load(file)
     
 vectorizer = TfidfVectorizer()
-Xtrain = vectorizer.fit_transform(x).toarray()
+tfidf = vectorizer.fit(x)
+
+pickle.dump(tfidf, open("tfidf.pickle", "wb"))
+tfidf = pickle.load(open("tfidf.pickle", 'rb'))
+
+Xtrain = tfidf.transform(x).toarray()
 Ytrain = np.asarray(y)
 
 # MultinomialNB
