@@ -7,20 +7,20 @@ from sklearn.model_selection import cross_val_score
 from sklearn.externals import joblib
 import pickle
 
-with open('/notebooks/data/x.json', 'r') as file:
-    x = json.load(file)
+with open('/notebooks/data/contents.json', 'r') as file:
+    contents = json.load(file)
 
-with open('/notebooks/data/y.json', 'r') as file:
-    y = json.load(file)
-    
+with open('/notebooks/data/labels.json', 'r') as file:
+    labels = json.load(file)
+
 vectorizer = TfidfVectorizer()
-tfidf = vectorizer.fit(x)
+tfidf = vectorizer.fit(contents)
 
 pickle.dump(tfidf, open("tfidf.pickle", "wb"))
 tfidf = pickle.load(open("tfidf.pickle", 'rb'))
 
-Xtrain = tfidf.transform(x).toarray()
-Ytrain = np.asarray(y)
+Xtrain = tfidf.transform(contents).toarray()
+Ytrain = np.asarray(labels)
 
 # MultinomialNB
 
