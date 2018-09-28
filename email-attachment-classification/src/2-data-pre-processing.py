@@ -1,3 +1,13 @@
+
+# coding: utf-8
+
+# # Data Pre-Processing
+
+# ## Word Segmentation
+
+# In[ ]:
+
+
 import json
 import tnthai.segment as tn
 
@@ -10,6 +20,6 @@ with open('/notebooks/data/attachments.json', 'r') as file:
     term = tn.UnsafeSegment(content)
     segmented.append(term[1][0])
 
-with open('/notebooks/data/segments.json', 'w') as outfile:
+with open('/notebooks/data/word-sequences.json', 'w') as outfile:
   json.dump(segmented, outfile, indent=4)
-  
+
